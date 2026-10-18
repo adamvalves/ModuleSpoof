@@ -1,0 +1,27 @@
+name: ModuleSpoof CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build ModuleSpoof & Protected (x64 Release)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build Solution
+        run: |
+          msbuild ModuleSpoof.sln /p:Configuration=Release /p:Platform=x64
+
+      - name: Verify Artifacts
+        run: |
+          Get-ChildItem -Recurse ModuleSpoof, Protected -Include *.cpp, *.hpp | Measure-Object | ForEach-Object { Write-Host "Verified $($_.Count) C++ source files." }
