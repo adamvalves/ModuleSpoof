@@ -1,5 +1,10 @@
 # ModuleSpoof — DLL Memory Location Redirection & Honeypot Framework
 
+[![ModuleSpoof CI](https://github.com/adamvalves/ModuleSpoof/actions/workflows/ci.yml/badge.svg)](https://github.com/adamvalves/ModuleSpoof/actions/workflows/ci.yml)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Language: C++20](https://img.shields.io/badge/Language-C%2B%2B20-orange.svg)
+![Platform: Windows%20x64](https://img.shields.io/badge/Platform-Windows%20x64-0078D6.svg)
+
 `ModuleSpoof` is a proof-of-concept C++ library designed to spoof the in-memory location of a target dynamic link library (`DLL`). By intercepting internal Win32 and Native API calls (`GetModuleHandleW`, `GetModuleHandleExW`, `GetProcAddress`, `GetProcAddressForCaller`, `LoadLibraryExW`), internal execution is transparently redirected to a manually mapped copy of the module residing at a secondary memory region.
 
 Simultaneously, the original PEB-registered module location acts as an active **honeypot** to detect unauthorized memory inspection or unbacked access attempts by external tools.
